@@ -58,9 +58,9 @@ const experiencesData = [
 
 const Experience = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { threshold: 0.5 });
-  const mainControls = useAnimation();
-  const experiencesDataControlsArray = Array.from({ length: experiencesData.length }, () => useAnimation());
+  const { ref: inViewRef, inView } = useInView({ threshold: 0.5 });
+  
+ 
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const Experience = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isVisible, isInView]);
+  }, [inView]);
   
   
   
@@ -137,12 +137,11 @@ const Experience = () => {
         
             icon={item.icon}
             iconStyle={{
-        
-              background:
-                "rgba(255, 255, 255, 0)",
-              fontSize: "1.5rem",
+              background: 'rgba(255, 255, 255, 0)',
+              fontSize: '1.5rem',
             }}
-                transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5 }}
+            ref={inViewRef}
           >
             <h3 className=" font-semibold capitalize text-xl bg-clip-text text-slate-300">{item.title}</h3>
             <p className="font-extrabold text-left text-xl !mt-0 text-red-300">{item.company}</p> 

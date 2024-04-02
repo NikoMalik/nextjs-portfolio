@@ -30,45 +30,34 @@ export const services = [
 const Services = () => {
   const ref = useRef(null);
   const isInView = useInView({ threshold: 0.5 });
-  const mainControls = useAnimation();
-  const serviceControlsArray = Array.from({ length: services.length }, () => useAnimation());
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (isInView) {
-      setIsVisible(true);
-      
-      services.forEach((_, index) => {
-        setTimeout(() => {
-          serviceControlsArray[index].start('visible');
-        }, index * 1000); 
-      });
-    } else {
-      setIsVisible(false);
-      
-      serviceControlsArray.forEach(control => control.start('hidden'));
-    }
-  }, [isInView, mainControls, serviceControlsArray]);
-  
-  
-  const handleScroll = () => {
-    const sectionTop = ref.current.getBoundingClientRect().top;
-    const sectionBottom = ref.current.getBoundingClientRect().bottom;
-    const windowHeight = window.innerHeight;
+    const handleScroll = () => {
+      const sectionTop = ref.current.getBoundingClientRect().top;
+      const sectionBottom = ref.current.getBoundingClientRect().bottom;
+      const windowHeight = window.innerHeight;
 
-    if (sectionTop < windowHeight && sectionBottom > 0) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
+      if (sectionTop < windowHeight && sectionBottom > 0) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
 
-  useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (isInView) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  }, [isInView]);
 
   return (
     <motion.section
@@ -91,7 +80,7 @@ const Services = () => {
               animate={isVisible ? 'visible' : 'hidden'}
               variants={{
                 hidden: { opacity: 0, y: 50 },
-                visible: { opacity: 1, y: 0, transition: { delay: index * 0.1 } },
+                visible: { opacity: 1, y: 0, transition: { delay: index * 0.5 } },
               }}
             >
               <div className="text-sky-100 rounded sm w-12 h-12 flex justify-center items-center mb-24 text-5xl">{service.icon}</div>
