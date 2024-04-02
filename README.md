@@ -9,7 +9,7 @@
   <br><br>
 </div>
 
-<img src="https://pale-w.vercel.app/public/images/preview.png">
+<img src="https://pale-w.vercel.app/public/images/preview.png](https://pale-w.vercel.app/_next/image?url=%2Fimages%2Fportfolio.png&w=828&q=75">
 
  
 
@@ -18,7 +18,7 @@
 This is a portfolio website built with Next.js and Tailwind CSS. It showcases your skills, projects, and achievements in an elegant and responsive design.
 
 #### Installation
-1. Clone the repository: `git clone https://github.com/judygab/nextjs-portfolio.git`
+1. Clone the repository: `git clone https://github.com/PALE-W/nextjs-portfolio.git`
 2. Navigate to the project directory: `cd src`
 3. Install the dependencies: `npm install`
 
