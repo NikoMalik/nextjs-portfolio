@@ -29,20 +29,19 @@ export const services = [
 
 const Services = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { threshold: 0.5 });
+  const isInView = useInView({ threshold: 0.5 });
   const mainControls = useAnimation();
   const serviceControlsArray = Array.from({ length: services.length }, () => useAnimation());
   const [isVisible, setIsVisible] = useState(false);
 
-
   useEffect(() => {
     if (isInView) {
-      setIsVisible(true)
+      setIsVisible(true);
       
       services.forEach((_, index) => {
         setTimeout(() => {
           serviceControlsArray[index].start('visible');
-        }, index * 500); 
+        }, index * 1000); 
       });
     } else {
       setIsVisible(false);
@@ -69,52 +68,39 @@ const Services = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);;
+  }, []);
 
   return (
     <motion.section
-    id="skills"
+      id="skills"
       ref={ref}
       style={{ position: 'relative', overflow: 'hidden' }}
-      className="py-20 min-h-screen px-4  sm:px-6 mb-40 container mx-auto  "
-      variants={{
-        hidden: { opacity: 0, y: 1 },
-        visible: { opacity: 1, y: 0 },
-      }}
-      initial={{ opacity: 0, y: 75, scale: 0.75 }}
-      animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8}}
-      transition={{ duration: 0.5}}
+      className="py-20 min-h-screen px-4 sm:px-6 mb-40 container mx-auto"
     >
-      <div className="flex flex-col h-full ">
+      <div className="flex flex-col h-full">
         <div>
-          <SectionHeading>
-            What I can do for clients
-          </SectionHeading>
+          <SectionHeading>What I can do for clients</SectionHeading>
         </div>
 
         <div className="py-20 grid md:grid-cols-4 lq:grid-cols-4 sm:grid gap-8">
-          {services.map((service, index) => {
-            const { icon, name, description } = service;
-            return (
-              <motion.div
-                key={index}
-                className="border border-slate-300/50 backdrop-blur-xl p-6 rounded-2xl"
-                variants={{
-                  hidden: { opacity: 0, y: 1 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                initial="hidden"
-                animate={serviceControlsArray[index]}
-                transition={{ duration: 1 }}
-              >
-                <div className="text-sky-100 rounded sm w-12 h-12 flex justify-center items-center mb-24 text-5xl">{icon}</div>
-                <h3 className="text-2xl sm:text-5xl lg:text-xl lg:leading-normal bg-clip-text text-transparent bg-gradient-to-r from-zinc-200/80 via-zinc-200 to-zinc-200/80 font-semibold">
-                  {name}
-                </h3>
-                <p className="text-slate-300 text-xl sm:text-sm mb-6 py-3 md:text-xl lg:text-xl font-mono lg:leading-normal">{description}</p>
-              </motion.div>
-            );
-          })}
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              className="border border-slate-300/50 backdrop-blur-xl p-6 rounded-2xl"
+              initial="hidden"
+              animate={isVisible ? 'visible' : 'hidden'}
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: { opacity: 1, y: 0, transition: { delay: index * 0.1 } },
+              }}
+            >
+              <div className="text-sky-100 rounded sm w-12 h-12 flex justify-center items-center mb-24 text-5xl">{service.icon}</div>
+              <h3 className="text-2xl sm:text-5xl lg:text-xl lg:leading-normal bg-clip-text text-transparent bg-gradient-to-r from-zinc-200/80 via-zinc-200 to-zinc-200/80 font-semibold">
+                {service.name}
+              </h3>
+              <p className="text-slate-300 text-xl sm:text-sm mb-6 py-3 md:text-xl lg:text-xl font-mono lg:leading-normal">{service.description}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </motion.section>

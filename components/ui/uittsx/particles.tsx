@@ -124,10 +124,10 @@ export default function Particles({
 			context.current.translate(translateX, translateY);
 			context.current.beginPath();
 			context.current.arc(x, y, size, 0, 2 * Math.PI);
-			// Увеличиваем яркость цвета звезд
+		
 			context.current.fillStyle = `rgba(255, 255, 255, ${alpha * 2})`;
-			context.current.shadowColor = "rgba(255, 255, 255, 0.5)"; // Устанавливаем цвет тени
-			context.current.shadowBlur = 20; // Устанавливаем радиус размытия тени
+			context.current.shadowColor = "rgba(255, 255, 255, 0.5)"; 
+			context.current.shadowBlur = 20; 
 			context.current.fill();
 			context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
 
@@ -172,12 +172,12 @@ export default function Particles({
 	const animate = () => {
 		clearContext();
 		circles.current.forEach((circle: Circle, i: number) => {
-			// Handle the alpha value
+		
 			const edge = [
-				circle.x + circle.translateX - circle.size, // distance from left edge
-				canvasSize.current.w - circle.x - circle.translateX - circle.size, // distance from right edge
-				circle.y + circle.translateY - circle.size, // distance from top edge
-				canvasSize.current.h - circle.y - circle.translateY - circle.size, // distance from bottom edge
+				circle.x + circle.translateX - circle.size, 
+				canvasSize.current.w - circle.x - circle.translateX - circle.size, 
+				circle.y + circle.translateY - circle.size, 
+				canvasSize.current.h - circle.y - circle.translateY - circle.size, 
 			];
 			const closestEdge = edge.reduce((a, b) => Math.min(a, b));
 			const remapClosestEdge = parseFloat(
@@ -199,19 +199,19 @@ export default function Particles({
 			circle.translateY +=
 				(mouse.current.y / (staticity / circle.magnetism) - circle.translateY) /
 				ease;
-			// circle gets out of the canvas
+			
 			if (
 				circle.x < -circle.size ||
 				circle.x > canvasSize.current.w + circle.size ||
 				circle.y < -circle.size ||
 				circle.y > canvasSize.current.h + circle.size
 			) {
-				// remove the circle from the array
+			
 				circles.current.splice(i, 1);
-				// create a new circle
+			
 				const newCircle = circleParams();
 				drawCircle(newCircle);
-				// update the circle position
+				
 			} else {
 				drawCircle(
 					{

@@ -64,41 +64,29 @@ const Experience = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (isInView) {
-      setIsVisible(true);
-      
-      experiencesData.forEach((_, index) => {
-        setTimeout(() => {
-          experiencesDataControlsArray[index].start('visible');
-        }, index * 500); 
-      });
-    } else {
-      setIsVisible(false);
-      
-      experiencesDataControlsArray.forEach(control => control.start('hidden'));
-    }
-  }, [isInView, mainControls, experiencesDataControlsArray]);
-  
-  
-  const handleScroll = () => {
-    const sectionTop = ref.current.getBoundingClientRect().top;
-    const sectionBottom = ref.current.getBoundingClientRect().bottom;
-    const windowHeight = window.innerHeight;
+    const handleScroll = () => {
+      const sectionTop = ref.current.getBoundingClientRect().top;
+      const sectionBottom = ref.current.getBoundingClientRect().bottom;
+      const windowHeight = window.innerHeight;
 
-    if (sectionTop < windowHeight && sectionBottom > 0) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
+      if (sectionTop < windowHeight && sectionBottom > 0) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
 
-
-  useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isVisible, isInView]);;
+  }, [isVisible, isInView]);
+  
+  
+  
+
+
+  
 
 
   return (
