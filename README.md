@@ -9,7 +9,7 @@
   <br><br>
 </div>
 
-<img src="https://pale-w.vercel.app/public/images/preview.png](https://pale-w.vercel.app/_next/image?url=%2Fimages%2Fportfolio.png&w=828&q=75">
+<img src="https://pale-w.vercel.app/_next/image?url=%2Fimages%2Fportfolio.png&w=828&q=75">
 
  
 
