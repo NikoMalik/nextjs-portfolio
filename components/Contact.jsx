@@ -6,10 +6,10 @@ import { AiOutlineGithub, AiOutlineLinkedin } from "react-icons/ai";
 import { useForm } from "@formspree/react";
 require("dotenv").config();
 import SectionHeading from './ui/uittsx/Sectionheader';
-const FORM = process.env.NEXT_PUBLIC_FORMSPREE.toString();
+const FORM = process.env.NEXT_PUBLIC_FORMSPREE;
 
 const Contact = () => {
-  const [state, handleSubmit] = useForm(FORM);
+  const [state, handleSubmit] = useForm("" + FORM);
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
 
