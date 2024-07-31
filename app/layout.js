@@ -41,7 +41,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="lenis ">
       <head>
-    <meta name="cryptomus" content="1c714290" />
+    
          <Analytics /> 
       </head>
       <body className={WorkSans.className} >{children}</body>
